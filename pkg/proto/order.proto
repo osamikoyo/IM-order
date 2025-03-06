@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message product{
+    string Name = 1;
+    uint64 ID = 2;
+}
+
+message Order{
+    uint64 ID = 1;
+    string Status = 4;
+    uint64 Price = 2;
+    string createdAt = 3;
+    repeated product prodcuts = 5;
+}
