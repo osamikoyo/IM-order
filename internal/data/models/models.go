@@ -8,6 +8,7 @@ type Product struct{
 }
 
 type Order struct{
+	UserID uint64 `bson:"user_id"`
 	ID uint64 `bson:"id"`
 	Status string `bson:"status"`
 	Price uint64 `bson:"price"`

@@ -1,5 +1,12 @@
 syntax = "proto3";
 
+option go_package = "./pkg/proto/pb";
+
+service OrderService{
+    rpc Create (CreateReq) returns (Response);
+    rpc Delete (DeleteReq) returns (Response);
+}
+
 message product{
     string Name = 1;
     uint64 ID = 2;
@@ -11,4 +18,35 @@ message Order{
     uint64 Price = 2;
     string createdAt = 3;
     repeated product prodcuts = 5;
+}
+
+message Response{
+    string error = 1;
+    uint32 status = 2;
+}
+
+message CreateReq{
+    Order order = 1;
+}
+
+message DeleteReq{
+    uint64 ID = 1;
+}
+
+message GetReq{
+    uint64 ID = 1;
+}
+
+message GetAllReq{
+    uint64 UserID = 1; 
+}
+
+message GetResp{
+    Response response = 1;
+    product product = 2;
+}
+
+message GetAllResp{
+    Response response = 1;
+    repeated product products = 2;
 }
