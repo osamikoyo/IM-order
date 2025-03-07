@@ -12,6 +12,7 @@ type Config struct{
 	MognoURl string
 	DBname string
 	Collname string
+	QueName string
 }
 
 func Load() (*Config, error){
@@ -28,6 +29,7 @@ func Load() (*Config, error){
 	viper.SetDefault("MONGO_URL", "mongodb://localhost:27017")
 	viper.SetDefault("DB_NAME", "im")
 	viper.SetDefault("COLL_NAME", "order")
+	viper.SetDefault("QUE_NAME", "order")
 
 	host := viper.GetString("HOST")
 	port := viper.GetString("PORT")
@@ -35,6 +37,7 @@ func Load() (*Config, error){
 	mongoUrl := viper.GetString("MONGO_URL")
 	dbName := viper.GetString("DB_NAME")
 	collName := viper.GetString("COLL_NAME")
+	quename := viper.GetString("QUE_NAME")
 
 	return &Config{
 		Host: host,
@@ -43,5 +46,6 @@ func Load() (*Config, error){
 		MognoURl: mongoUrl,
 		DBname: dbName,
 		Collname: collName,
+		QueName: quename,
 	}, err
 }
