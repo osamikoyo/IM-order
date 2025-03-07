@@ -25,6 +25,7 @@ func New(cfg *config.Config) (*Repository, error) {
 	}
 
 	return &Repository{
-		coll: client.Database("im").Collection(),
+		coll: client.Database(cfg.DBname).Collection(cfg.Collname),
+		ctx: ctx,
 	}, nil
 }
