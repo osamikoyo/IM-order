@@ -1,6 +1,9 @@
 package rpc
 
 import (
+	"context"
+	"time"
+
 	"github.com/osamikoyo/IM-order/internal/config"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
@@ -34,4 +37,34 @@ func New(cfg *config.Config) (*RpcServer, error) {
 		Channel: ch,
 		Queue: que,
 	}, err
+}
+
+func (r *RpcServer) Listen() error {
+	err := r.Channel.Qos(1,0,false)
+
+	msgs, err := r.Channel.Consume(
+		r.Queue.Name,
+		"",
+		false,
+		false,
+		false,
+		false,
+		nil,
+	)
+	if err != nil{
+		return err
+	}
+
+	var forever chan struct{}
+
+	go func ()  {
+		ctx, cancel := context.WithTimeout(context.Background(), 10 * time.Second)
+		defer cancel()
+		
+		for d := range msgs{
+
+		}
+
+		<- forever
+	}()
 }
