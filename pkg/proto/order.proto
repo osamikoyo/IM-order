@@ -5,11 +5,16 @@ option go_package = "./pkg/proto/pb";
 service OrderService{
     rpc Create (CreateReq) returns (Response);
     rpc Delete (DeleteReq) returns (Response);
+    rpc Get (GetReq) returns (GetResp);
 }
 
 message product{
     string Name = 1;
     uint64 ID = 2;
+}
+
+message GetReq{
+    uint64 id = 1;
 }
 
 message Order{
@@ -18,6 +23,11 @@ message Order{
     uint64 Price = 2;
     string createdAt = 3;
     repeated product prodcuts = 5;
+}
+
+message GetResp{
+    repeated Order orders = 1;
+    Response response = 2;
 }
 
 message Response{
@@ -33,18 +43,11 @@ message DeleteReq{
     uint64 ID = 1;
 }
 
-message GetReq{
-    uint64 ID = 1;
-}
 
 message GetAllReq{
     uint64 UserID = 1; 
 }
 
-message GetResp{
-    Response response = 1;
-    product product = 2;
-}
 
 message GetAllResp{
     Response response = 1;
