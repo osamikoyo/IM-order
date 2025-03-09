@@ -10,6 +10,7 @@ service OrderService{
 
 message product{
     string Name = 1;
+    string Price = 3;
     uint64 ID = 2;
 }
 
@@ -18,6 +19,7 @@ message GetReq{
 }
 
 message Order{
+    uint64 UserId = 6;
     uint64 ID = 1;
     string Status = 4;
     uint64 Price = 2;
