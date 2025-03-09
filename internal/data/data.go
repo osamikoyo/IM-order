@@ -57,3 +57,15 @@ func (r *Repository) GetAll() ([]models.Order, error){
 
 	return result, nil
 }
+
+func (r *Repository) UpdateStatus(id uint64, status string) error {
+	filter := bson.M{
+		"id" : id,
+	}
+	update := bson.M{
+		"status" : status,
+	}
+
+	res := r.coll.FindOneAndUpdate(r.ctx, filter, update)
+	return res.Err()
+}
