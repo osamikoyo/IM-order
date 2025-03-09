@@ -40,6 +40,10 @@ func New(cfg *config.Config) (*RpcServer, error) {
 		false,
 		nil,
 	)
+	if err != nil{
+		return err
+	}
+
 
 	repo,err := data.New(cfg)
 	if err != nil{
@@ -56,6 +60,9 @@ func New(cfg *config.Config) (*RpcServer, error) {
 
 func (r *RpcServer) Listen() error {
 	err := r.Channel.Qos(1,0,false)
+	if err != nil{
+		return err
+	}
 
 	msgs, err := r.Channel.Consume(
 		r.Queue.Name,
